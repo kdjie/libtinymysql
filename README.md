@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
 
     // 连接池对象
 
-    CMysqlConnPool pool;
+    CMysqlConnPoolTLS pool;
 
     pool.setLogReport(&syslog);
 
