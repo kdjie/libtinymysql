@@ -1,33 +1,26 @@
 ﻿//============================================================================
-// Name        : MysqlPool.cpp
+// Name        : MysqlPoolTLS.cpp
 // Author      : kdjie
 // Version     : 0.1
 // Copyright   : @2012
 // Description : 14166097@qq.com
 //============================================================================
 
-#include "MysqlPool.h"
+#include "MysqlPoolTLS.h"
 #include "MysqlConn.h"
 
 using namespace std;
 using namespace mysqlpp;
 using namespace tinymysql;
 
-CMysqlConnPool::CMysqlConnPool()
-{
-}
-CMysqlConnPool::~CMysqlConnPool()
-{
-}
-
 // 设置句柄参数
-void CMysqlConnPool::setHandleParam(const std::string& strHandleName, const SHandleParam& stParam)
+void CMysqlConnPoolTLS::setHandleParam(const std::string& strHandleName, const SHandleParam& stParam)
 {
     m_mapHandleParam[strHandleName] = stParam;
 }
 
 // 获取句柄参数
-const SHandleParam& CMysqlConnPool::getHandleParam(const std::string& strHandleName)
+const SHandleParam& CMysqlConnPoolTLS::getHandleParam(const std::string& strHandleName)
 {
     MAP_HANDLEPARAM_t::iterator c_iter = m_mapHandleParam.find(strHandleName);
     if (c_iter != m_mapHandleParam.end())
@@ -37,12 +30,12 @@ const SHandleParam& CMysqlConnPool::getHandleParam(const std::string& strHandleN
 }
 
 // 获取连接对象
-IMysqlConn* CMysqlConnPool::getConn(const std::string& strHandleName)
+IMysqlConn* CMysqlConnPoolTLS::getConn(const std::string& strHandleName)
 {
     const SHandleParam& stParam = getHandleParam(strHandleName);
 	if (!stParam.isValid())
 	{
-		getLogReport()->log(Error, "[CMysqlConnPool::getConn] invalid handle name:[%s]", strHandleName.c_str());
+		getLogReport()->log(Error, "[CMysqlConnPoolTLS::getConn] invalid handle name:[%s]", strHandleName.c_str());
 		return NULL;
 	}
 
@@ -67,13 +60,13 @@ IMysqlConn* CMysqlConnPool::getConn(const std::string& strHandleName)
 }
 
 // 回收连接对象
-void CMysqlConnPool::gcConn(IMysqlConn* pConn)
+void CMysqlConnPoolTLS::gcConn(IMysqlConn* pConn)
 {
     // nothing
 }
 
 // 销毁连接对象
-void CMysqlConnPool::destroyConn(IMysqlConn* pConn)
+void CMysqlConnPoolTLS::destroyConn(IMysqlConn* pConn)
 {
     // 从线程局部存储中清理
     MAP_HANDLEPCONN_t* pMapHandlePConn = __getMapHandlePConn();
@@ -84,7 +77,7 @@ void CMysqlConnPool::destroyConn(IMysqlConn* pConn)
 }
 
 // 获取当前线程的连接对象表
-CMysqlConnPool::MAP_HANDLEPCONN_t* CMysqlConnPool::__getMapHandlePConn()
+CMysqlConnPoolTLS::MAP_HANDLEPCONN_t* CMysqlConnPoolTLS::__getMapHandlePConn()
 {
     MAP_HANDLEPCONN_t* pMapHandlePConn = m_tsdMapHandlePConn.get();
     if (pMapHandlePConn == NULL)

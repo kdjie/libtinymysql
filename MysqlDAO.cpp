@@ -7,7 +7,6 @@
 //============================================================================
 
 #include "MysqlDAO.h"
-#include "MysqlPool.h"
 #include "FuncHelper.h"
 
 using namespace std;

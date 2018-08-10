@@ -1,5 +1,5 @@
 ﻿//============================================================================
-// Name        : MysqlPool.h
+// Name        : MysqlPoolTLS.h
 // Author      : kdjie
 // Version     : 0.1
 // Copyright   : @2012
@@ -15,7 +15,7 @@
 
 namespace tinymysql
 {
-    class CMysqlConnPool
+    class CMysqlConnPoolTLS
         : public IMysqlConnPool
         , public ILogReportAware
     {
@@ -30,8 +30,8 @@ namespace tinymysql
         TTSD<MAP_HANDLEPCONN_t> m_tsdMapHandlePConn;
 
     public:
-        CMysqlConnPool();
-        virtual ~CMysqlConnPool();
+        CMysqlConnPoolTLS() {}
+        virtual ~CMysqlConnPoolTLS() {}
 
         // 设置句柄参数
         void setHandleParam(const std::string& strHandleName, const SHandleParam& stParam);

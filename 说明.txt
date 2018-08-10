@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
     CSyslogReport syslog;
 
     // 连接池对象
-    CMysqlConnPool pool;
+    CMysqlConnPoolTLS pool;
     pool.setLogReport(&syslog);
 
     // 连接句柄初使化，这里声明了一个名叫test的句柄
