@@ -1,8 +1,7 @@
-# libtinymysql
+﻿# libtinymysql
 这是一个基于mysqlclient和mysqlpp的轻量级实用开发库。
 
-###### 使用前，需要确保本机上已经安装好mysql的开发库。
-
+### 使用前，需要确保本机上已经安装好mysql的开发库，操作如下：
 
 ```
 对centos来说，先安装mysqlclent：
@@ -26,9 +25,7 @@ make
 生成libtinymysql.a库文件
 ```
 
-
-
-本开发库的几个接口和类说明：
+### 本开发库的几个接口和类说明：
 
 ```
 IMysqlDAO 这是mysql执行DAO查询的接口，它包含三个方法：
@@ -51,9 +48,7 @@ CSyslogReport 这是syslog输出类，在centos下默认输出到/var/log/messag
 CMysqlConnPool 这是mysql连接池类，用来管理连接句柄及实际连接。
 ```
 
-
-
-样例程序：
+### 样例程序：
 
 ```
 #include <stdio.h>
@@ -118,7 +113,7 @@ int main(int argc, char* argv[])
 }
 ```
 
-编译：
+### 编译：
 
 ```
 g++ -o testmysql testmysql.cpp -DMYSQLPP_MYSQL_HEADERS_BURIED -lmysqlpp libtinymysql/libtinymysql.a
